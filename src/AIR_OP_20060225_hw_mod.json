@@ -1,0 +1,729 @@
+﻿{
+  "WorkspaceByCpu": {
+    "Nes": {
+      "WatchEntries": [
+        "[$1D]"
+      ],
+      "Labels": [
+        {
+          "Address": 8192,
+          "MemoryType": "NesMemory",
+          "Label": "PpuControl_2000",
+          "Comment": "7  bit  0\n---- ----\nVPHB SINN\n|||| ||||\n|||| ||\u002B\u002B- Base nametable address\n|||| ||    (0 = $2000; 1 = $2400; 2 = $2800; 3 = $2C00)\n|||| |\u002B--- VRAM address increment per CPU read/write of PPUDATA\n|||| |     (0: add 1, going across; 1: add 32, going down)\n|||| \u002B---- Sprite pattern table address for 8x8 sprites\n||||       (0: $0000; 1: $1000; ignored in 8x16 mode)\n|||\u002B------ Background pattern table address (0: $0000; 1: $1000)\n||\u002B------- Sprite size (0: 8x8; 1: 8x16)\n|\u002B-------- PPU master/slave select\n|          (0: read backdrop from EXT pins; 1: output color on EXT pins)\n\u002B--------- Generate an NMI at the start of the\n           vertical blanking interval (0: off; 1: on)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8193,
+          "MemoryType": "NesMemory",
+          "Label": "PpuMask_2001",
+          "Comment": "7  bit  0\n---- ----\nBGRs bMmG\n|||| ||||\n|||| |||\u002B- Display type: (0: color, 1: grayscale)\n|||| ||\u002B-- 1: Show background in leftmost 8 pixels of screen, 0: Hide\n|||| |\u002B--- 1: Show sprites in leftmost 8 pixels of screen, 0: Hide\n|||| \u002B---- 1: Show background\n|||\u002B------ 1: Show sprites\n||\u002B------- Emphasize red\n|\u002B-------- Emphasize green\n\u002B--------- Emphasize blue",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8194,
+          "MemoryType": "NesMemory",
+          "Label": "PpuStatus_2002",
+          "Comment": "7  bit  0\n---- ----\nVSO. ....\n|||| ||||\n|||\u002B-\u002B\u002B\u002B\u002B- Least significant bits previously written into a PPU register\n|||        (due to register not being updated for this address)\n||\u002B------- Sprite overflow. The intent was for this flag to be set\n||         whenever more than eight sprites appear on a scanline, but a\n||         hardware bug causes the actual behavior to be more complicated\n||         and generate false positives as well as false negatives; see\n||         PPU sprite evaluation. This flag is set during sprite\n||         evaluation and cleared at dot 1 (the second dot) of the\n||         pre-render line.\n|\u002B-------- Sprite 0 Hit.  Set when a nonzero pixel of sprite 0 overlaps\n|          a nonzero background pixel; cleared at dot 1 of the pre-render\n|          line.  Used for raster timing.\n\u002B--------- Vertical blank has started (0: not in vblank; 1: in vblank).\n           Set at dot 1 of line 241 (the line *after* the post-render\n           line); cleared after reading $2002 and at dot 1 of the\n           pre-render line.",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8195,
+          "MemoryType": "NesMemory",
+          "Label": "OamAddr_2003",
+          "Comment": "Set OAM address - Write only",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8196,
+          "MemoryType": "NesMemory",
+          "Label": "OamData_2004",
+          "Comment": "Read/Write OAM data",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8197,
+          "MemoryType": "NesMemory",
+          "Label": "PpuScroll_2005",
+          "Comment": "Set PPU scroll, write twice - Write only",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8198,
+          "MemoryType": "NesMemory",
+          "Label": "PpuAddr_2006",
+          "Comment": "Set PPU address, write twice - Write only",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 8199,
+          "MemoryType": "NesMemory",
+          "Label": "PpuData_2007",
+          "Comment": "Read/Write VRAM",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16384,
+          "MemoryType": "NesMemory",
+          "Label": "Sq0Duty_4000",
+          "Comment": "DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16385,
+          "MemoryType": "NesMemory",
+          "Label": "Sq0Sweep_4001",
+          "Comment": "EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16386,
+          "MemoryType": "NesMemory",
+          "Label": "Sq0Timer_4002",
+          "Comment": "TTTT TTTT\nTimer low (T)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16387,
+          "MemoryType": "NesMemory",
+          "Label": "Sq0Length_4003",
+          "Comment": "LLLL LTTT\nLength counter load (L), timer high (T)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16388,
+          "MemoryType": "NesMemory",
+          "Label": "Sq1Duty_4004",
+          "Comment": "DDLC VVVV\nDuty (D), envelope loop / length counter halt (L), constant volume (C), volume/envelope (V)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16389,
+          "MemoryType": "NesMemory",
+          "Label": "Sq1Sweep_4005",
+          "Comment": "EPPP NSSS\nSweep unit: enabled (E), period (P), negate (N), shift (S)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16390,
+          "MemoryType": "NesMemory",
+          "Label": "Sq1Timer_4006",
+          "Comment": "TTTT TTTT\nTimer low (T)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16391,
+          "MemoryType": "NesMemory",
+          "Label": "Sq1Length_4007",
+          "Comment": "LLLL LTTT\nLength counter load (L), timer high (T)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16392,
+          "MemoryType": "NesMemory",
+          "Label": "TrgLinear_4008",
+          "Comment": "CRRR RRRR\nLength counter halt / linear counter control (C), linear counter load (R)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16394,
+          "MemoryType": "NesMemory",
+          "Label": "TrgTimer_400A",
+          "Comment": "TTTT TTTT\nTimer low (T)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16395,
+          "MemoryType": "NesMemory",
+          "Label": "TrgLength_400B",
+          "Comment": "LLLL LTTT\nLength counter load (L), timer high (T)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16396,
+          "MemoryType": "NesMemory",
+          "Label": "NoiseVolume_400C",
+          "Comment": "--LC VVVV\nEnvelope loop / length counter halt (L), constant volume (C), volume/envelope (V)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16398,
+          "MemoryType": "NesMemory",
+          "Label": "NoisePeriod_400E",
+          "Comment": "L--- PPPP\nLoop noise (L), noise period (P)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16399,
+          "MemoryType": "NesMemory",
+          "Label": "NoiseLength_400F",
+          "Comment": "LLLL L---\nLength counter load (L)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16400,
+          "MemoryType": "NesMemory",
+          "Label": "DmcFreq_4010",
+          "Comment": "IL-- RRRR\nIRQ enable (I), loop (L), frequency (R)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16401,
+          "MemoryType": "NesMemory",
+          "Label": "DmcCounter_4011",
+          "Comment": "-DDD DDDD\nLoad counter (D)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16402,
+          "MemoryType": "NesMemory",
+          "Label": "DmcAddress_4012",
+          "Comment": "AAAA AAAA\nSample address (A)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16403,
+          "MemoryType": "NesMemory",
+          "Label": "DmcLength_4013",
+          "Comment": "LLLL LLLL\nSample length (L)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16404,
+          "MemoryType": "NesMemory",
+          "Label": "SpriteDma_4014",
+          "Comment": "Writing $XX will upload 256 bytes of data from CPU page $XX00-$XXFF to the internal PPU OAM.",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16405,
+          "MemoryType": "NesMemory",
+          "Label": "ApuStatus_4015",
+          "Comment": "Read:\nIF-D NT21\nDMC interrupt (I), frame interrupt (F), DMC active (D), length counter \u003E 0 (N/T/2/1)\n\nWrite:\n---D NT21\nEnable DMC (D), noise (N), triangle (T), and pulse channels (2/1)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16406,
+          "MemoryType": "NesMemory",
+          "Label": "Ctrl1_4016",
+          "Comment": "Read (NES - input):\n---4 3210\nRead data from controller port #1.\n\nWrite:\n---- ---A\nOutput data (strobe) to both controllers.",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 16407,
+          "MemoryType": "NesMemory",
+          "Label": "Ctrl2_FrameCtr_4017",
+          "Comment": "Read (NES - input):\n---4 3210\nRead data from controller port #2.\n\nWrite (Frame counter): MI-- ----\nMode (M, 0 = 4-step, 1 = 5-step), IRQ inhibit flag (I)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 57679,
+          "MemoryType": "NesPrgRom",
+          "Label": "inital_mask_decidion",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 60175,
+          "MemoryType": "NesPrgRom",
+          "Label": "set_last_scene",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 60688,
+          "MemoryType": "NesPrgRom",
+          "Label": "disable_drawing",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 60698,
+          "MemoryType": "NesPrgRom",
+          "Label": "enable_drawing",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 60862,
+          "MemoryType": "NesPrgRom",
+          "Label": "upload_palete",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 61103,
+          "MemoryType": "NesPrgRom",
+          "Label": "nmi_black",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64848,
+          "MemoryType": "NesPrgRom",
+          "Label": "last_scroll_scene3B",
+          "Comment": "hblank delay",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64868,
+          "MemoryType": "NesPrgRom",
+          "Label": "skip_palete",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64896,
+          "MemoryType": "NesPrgRom",
+          "Label": "upload_palete_short",
+          "Comment": "fill palete 0~3 with palete table index \u002B hrizonal line delay.\r\ncopy routine from upload_palete.",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65024,
+          "MemoryType": "NesPrgRom",
+          "Label": "last_scroll_start",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65049,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "update palete blank bar wait",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65072,
+          "MemoryType": "NesPrgRom",
+          "Label": "nmi_callback_04",
+          "Comment": "check scene #3B(last scroll)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65088,
+          "MemoryType": "NesPrgRom",
+          "Label": "nmi_last_scroll_black_start",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65104,
+          "MemoryType": "NesPrgRom",
+          "Label": "last_scroll_PPUSCROLL",
+          "Comment": "set scroll xy first",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65152,
+          "MemoryType": "NesPrgRom",
+          "Label": "last_scroll_end",
+          "Comment": "hblank delay",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65189,
+          "MemoryType": "NesPrgRom",
+          "Label": "LSE_black_loop",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65200,
+          "MemoryType": "NesPrgRom",
+          "Label": "nmi_scene3B",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65232,
+          "MemoryType": "NesPrgRom",
+          "Label": "force_palate0",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 29,
+          "MemoryType": "NesInternalRam",
+          "Label": "ZP_NMI_MODE",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 41,
+          "MemoryType": "NesInternalRam",
+          "Label": "ZP_PPUMASK_VALUE",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64992,
+          "MemoryType": "NesPrgRom",
+          "Label": "h_mirror_scroll0",
+          "Comment": "reset scroll x position.\r\nreset MMC5 mirror option.",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64976,
+          "MemoryType": "NesPrgRom",
+          "Label": "all_mirror_screen2_scroll_e8",
+          "Comment": "patch for unexpected white letter box/pillar box\r\n- screen position F8h to E8h. \r\n- H\u0026V mirror with MMC5 power.",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65166,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "palete black",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65170,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "disable screen drawing",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65173,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "$3F00 palete",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65179,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "fill 4 palete",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65191,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "re-enable screen",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65154,
+          "MemoryType": "NesPrgRom",
+          "Label": "LSE_hblank_wait",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65158,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "blank CHR bank",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65106,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "x",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65111,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "y",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65114,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "x",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65119,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "hblank delay",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65121,
+          "MemoryType": "NesPrgRom",
+          "Label": "LSSPS_hblank_delay",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65124,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "avoid artifact??",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65133,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "restore ppu controll",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65138,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "enable drawing",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65078,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "when scene #3C (last sayounara screen)\r\nchange palete for upper letter box",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65037,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "when scene #3C (sayounara screen)\r\ndo not modify palete to reduce artifact.\r\ndelay hblank",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65042,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "set uplaod_palete_short delay option",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65046,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "disable screen",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 31,
+          "MemoryType": "NesInternalRam",
+          "Label": "ZP_PALETE_TABLE_INDEX",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 65026,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "check last scroll scene (#3B)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64998,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "vectrical mirror",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64853,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "restore palete0 color (white)",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64857,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "disable screen",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64855,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "PPU CONTROL",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 27,
+          "MemoryType": "NesInternalRam",
+          "Label": "ZP_CHRROM_BANK",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 64958,
+          "MemoryType": "NesPrgRom",
+          "Label": "",
+          "Comment": "hrizonal delay",
+          "Flags": "None",
+          "Length": 1
+        },
+        {
+          "Address": 49,
+          "MemoryType": "NesInternalRam",
+          "Label": "ZP_H_DELAY",
+          "Comment": "",
+          "Flags": "None",
+          "Length": 1
+        }
+      ],
+      "Breakpoints": [
+        {
+          "BreakOnRead": false,
+          "BreakOnWrite": true,
+          "BreakOnExec": true,
+          "Enabled": false,
+          "MarkEvent": false,
+          "IgnoreDummyOperations": true,
+          "MemoryType": "NesMemory",
+          "StartAddress": 20995,
+          "EndAddress": 20995,
+          "CpuType": "Nes",
+          "AnyAddress": false,
+          "IsAssert": false,
+          "Condition": ""
+        },
+        {
+          "BreakOnRead": false,
+          "BreakOnWrite": true,
+          "BreakOnExec": true,
+          "Enabled": false,
+          "MarkEvent": false,
+          "IgnoreDummyOperations": true,
+          "MemoryType": "NesMemory",
+          "StartAddress": 38,
+          "EndAddress": 38,
+          "CpuType": "Nes",
+          "AnyAddress": false,
+          "IsAssert": false,
+          "Condition": ""
+        },
+        {
+          "BreakOnRead": false,
+          "BreakOnWrite": true,
+          "BreakOnExec": true,
+          "Enabled": false,
+          "MarkEvent": false,
+          "IgnoreDummyOperations": true,
+          "MemoryType": "NesMemory",
+          "StartAddress": 20741,
+          "EndAddress": 20741,
+          "CpuType": "Nes",
+          "AnyAddress": false,
+          "IsAssert": false,
+          "Condition": ""
+        },
+        {
+          "BreakOnRead": false,
+          "BreakOnWrite": false,
+          "BreakOnExec": true,
+          "Enabled": false,
+          "MarkEvent": false,
+          "IgnoreDummyOperations": true,
+          "MemoryType": "NesPrgRom",
+          "StartAddress": 57667,
+          "EndAddress": 57667,
+          "CpuType": "Nes",
+          "AnyAddress": false,
+          "IsAssert": false,
+          "Condition": ""
+        },
+        {
+          "BreakOnRead": false,
+          "BreakOnWrite": false,
+          "BreakOnExec": true,
+          "Enabled": false,
+          "MarkEvent": false,
+          "IgnoreDummyOperations": true,
+          "MemoryType": "NesPrgRom",
+          "StartAddress": 64976,
+          "EndAddress": 64976,
+          "CpuType": "Nes",
+          "AnyAddress": false,
+          "IsAssert": false,
+          "Condition": ""
+        }
+      ]
+    }
+  },
+  "TblMappings": []
+}
